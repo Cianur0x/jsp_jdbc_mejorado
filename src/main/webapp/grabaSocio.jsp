@@ -83,6 +83,7 @@
 
             ps = conn.prepareStatement(sql);
             int idx = 1;
+            // post incremento
             ps.setInt(idx++, numero);
             ps.setString(idx++, nombre);
             ps.setInt(idx++, estatura);
