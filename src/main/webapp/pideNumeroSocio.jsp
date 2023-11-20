@@ -22,11 +22,15 @@
     <%
       while (listado.next()) {
           out.println("<tr><td>");
-          out.println(listado.getString("socioID") + "</td>");
-          out.println("<td>" + listado.getString("nombre") + "</td>");
-          out.println("<td>" + listado.getString("estatura") + "</td>");
-          out.println("<td>" + listado.getString("edad") + "</td>");
-          out.println("<td>" + listado.getString("localidad") + "</td>");
+          %>
+        <a href="mostarInfo.jsp?socioid=" + listado.get></a>
+
+        <%
+            out.println(listado.getString("socioID") + "</td>");
+            out.println("<td>" + listado.getString("nombre") + "</td>");
+            out.println("<td>" + listado.getString("estatura") + "</td>");
+            out.println("<td>" + listado.getString("edad") + "</td>");
+            out.println("<td>" + listado.getString("localidad") + "</td>");
     %>
       <td>
       <form method="get" action="borraSocio.jsp">
