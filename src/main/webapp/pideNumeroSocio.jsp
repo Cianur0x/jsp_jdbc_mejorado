@@ -22,10 +22,6 @@
     <%
       while (listado.next()) {
           out.println("<tr><td>");
-          %>
-        <a href="mostarInfo.jsp?socioid=" + listado.get></a>
-
-        <%
             out.println(listado.getString("socioID") + "</td>");
             out.println("<td>" + listado.getString("nombre") + "</td>");
             out.println("<td>" + listado.getString("estatura") + "</td>");
