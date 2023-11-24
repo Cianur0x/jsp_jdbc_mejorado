@@ -20,14 +20,19 @@
     <table>
       <tr><th>Código</th><th>Nombre</th><th>Estatura</th><th>Edad</th><th>Localidad</th></tr>
     <%
+      String claseADestacar = "";
+      Integer socioIDADestacar = (Integer)session.getAttribute("socioIDADestacar");
       while (listado.next()) {
-          out.println("<tr><td>");
-            out.println(listado.getString("socioID") + "</td>");
-            out.println("<td>" + listado.getString("nombre") + "</td>");
-            out.println("<td>" + listado.getString("estatura") + "</td>");
-            out.println("<td>" + listado.getString("edad") + "</td>");
-            out.println("<td>" + listado.getString("localidad") + "</td>");
+      claseADestacar = (socioIDADestacar != null && socioIDADestacar == listado.getInt("socioID")) ? "destacar" : "";
+      session.removeAttribute("socioIDADestacar");
     %>
+          <tr class="<%=claseADestacar%>"><td>
+            <%= listado.getInt("socioID") %></td>
+            <td><%= listado.getString("nombre") %></td>
+            <td><%= listado.getInt("estatura") %> </td>
+            <td><%= listado.getInt("edad") %></td>
+            <td><%= listado.getString("localidad") %></td>
+
       <td>
       <form method="get" action="borraSocio.jsp">
         <input type="hidden" name="codigo" value="<%=listado.getString("socioID") %>"/>

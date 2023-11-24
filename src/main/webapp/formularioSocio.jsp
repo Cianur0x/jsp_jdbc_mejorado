@@ -14,5 +14,15 @@
       Localidad <input type="text" name="localidad"/></br>
       <input type="submit" value="Aceptar">
     </form>
+  <%
+    String mensaje = (String)session.getAttribute("error");
+    if (mensaje != null) {
+  %>
+    <span style=" background-color: crimson; color: yellow; font-weight: bold"><%=mensaje %></span>
+    <%
+            // para que no se queden los errores cargados en la sesion hay que borrarlos
+        session.removeAttribute("error");
+    }
+    %>
   </body>
 </html>

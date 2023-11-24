@@ -75,6 +75,7 @@
     </tr>
 
 </table>
+<a href="index.jsp">Home</a>
 <%
             }
 
