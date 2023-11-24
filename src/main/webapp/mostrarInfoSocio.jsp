@@ -31,7 +31,7 @@
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/baloncesto", "user", "1234");
 
-            String sql = "SELECT * FROM socio WHERE socioID=?";
+            String sql = "SELECT * FROM socio WHERE socioID = ?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, codigo);
 
@@ -61,18 +61,21 @@
         </th>
     </tr>
     <tr>
-        <td><%=numSocio%></td>
-        <td><%=nombre%></td>
-        <td><%=estatura%></td>
-        <td><%=edad%></td>
-        <td><%=localidad%></td>
+        <td><%=numSocio%>
+        </td>
+        <td><%=nombre%>
+        </td>
+        <td><%=estatura%>
+        </td>
+        <td><%=edad%>
+        </td>
+        <td><%=localidad%>
+        </td>
 
     </tr>
 
 </table>
 <%
-            } else {
-                out.println("k pasao");
             }
 
         } catch (Exception ex) {
