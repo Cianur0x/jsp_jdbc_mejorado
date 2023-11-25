@@ -9,7 +9,8 @@
     <a href="hello-servlet">Hello Servlet</a><br>
     <a href="listadoSocios.jsp">Listado de Socios</a><br>
     <a href="formularioSocio.jsp">Fomulario de Socio Nuevo</a><br>
-    <a href="pideNumeroSocio.jsp">Listado de Socios</a>
-    <a href="pedirInfo.jsp">Soliciat Información Usuario</a>
+    <a href="pideNumeroSocio.jsp">Listado de Socios</a><br>
+    <a href="pedirInfo.jsp">Solicita Información Usuario</a><br>
+    <a href="entrenamientos/formularioEntrenamiento.jsp">Entrenamientos</a><br>
 </body>
 </html>

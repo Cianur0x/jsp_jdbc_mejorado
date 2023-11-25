@@ -1,6 +1,6 @@
 <%@page import="java.sql.*" %>
 <%@page import="java.util.Objects" %>
-<%@ page import="java.io.IOException" %>
+<%@page import="java.io.IOException" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -88,7 +88,7 @@
             //CARGA DEL DRIVER Y PREPARACIÓN DE LA CONEXIÓN CON LA BBDD
             //						v---------UTILIZAMOS LA VERSIÓN MODERNA DE LLAMADA AL DRIVER, no deprecado
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/baloncesto", "user", "1234");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/baloncesto", "root", "giorno");
 
 
 //>>>>>>NO UTILIZAR STATEMENT EN QUERIES PARAMETRIZADAS

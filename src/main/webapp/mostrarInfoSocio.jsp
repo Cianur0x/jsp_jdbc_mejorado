@@ -29,7 +29,7 @@
 
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/baloncesto", "user", "1234");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/baloncesto", "root", "giorno");
 
             String sql = "SELECT * FROM socio WHERE socioID = ?";
             ps = conn.prepareStatement(sql);

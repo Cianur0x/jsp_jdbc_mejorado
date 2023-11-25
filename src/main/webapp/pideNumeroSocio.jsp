@@ -12,7 +12,7 @@
   <body>
     <%
       Class.forName("com.mysql.cj.jdbc.Driver");
-      Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/baloncesto","user", "1234");
+      Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/baloncesto","root", "giorno");
       Statement s = conexion.createStatement();
 
       ResultSet listado = s.executeQuery ("SELECT * FROM socio");

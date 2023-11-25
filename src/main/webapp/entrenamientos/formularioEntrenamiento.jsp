@@ -13,12 +13,11 @@
 </head>
 <body>
 <h2>Introduzca los datos del nuevo socio:</h2>
-<form method="get" action="grabaSocio.jsp">
-    Nº socio <input type="text" name="numero"/></br>
-    Nombre <input type="text" name="nombre"/></br>
-    Estatura <input type="text" name="estatura"/></br>
-    Edad <input type="text" name="edad"/></br>
-    Localidad <input type="text" name="localidad"/></br>
+<form method="get" action="grabaEntrenamiento.jsp">
+    Nº Entrenamiento <input type="text" name="numero"/></br>
+    Tipo Entrenamiento <input type="text" name="tipo"/></br>
+    Ubicación <input type="text" name="ubicacion"/></br>
+    Fecha <input type="date"  name="fecha" />
     <input type="submit" value="Aceptar">
 </form>
 <%
