@@ -13,7 +13,7 @@
 </head>
 <body>
 <h2>Introduzca los datos del nuevo socio:</h2>
-<form method="get" action="grabaEntrenamiento.jsp">
+<form method="post" action="grabaEntrenamiento.jsp">
     Nº Entrenamiento <input type="text" name="numero"/></br>
     Tipo Entrenamiento <input type="text" name="tipo"/></br>
     Ubicación <input type="text" name="ubicacion"/></br>
@@ -21,6 +21,7 @@
     <input type="submit" value="Aceptar">
 </form>
 <%
+    // Se revida si hay algun emensaje de error y se carga en un span
     String mensaje = (String)session.getAttribute("error");
     if (mensaje != null) {
 %>

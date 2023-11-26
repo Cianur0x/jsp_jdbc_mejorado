@@ -1,6 +1,7 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.PreparedStatement" %>
-<%@ page import="java.sql.DriverManager" %><%--
+<%@ page import="java.sql.DriverManager" %>
+<%--
   Created by IntelliJ IDEA.
   User: pika_
   Date: 25/11/2023
@@ -50,8 +51,6 @@
             ex.printStackTrace();
         } finally {
             //BLOQUE FINALLY PARA CERRAR LA CONEXIÓN CON PROTECCIÓN DE try-catch
-            //SIEMPRE HAY QUE CERRAR LOS ELEMENTOS DE LA  CONEXIÓN DESPUÉS DE UTILIZARLOS
-            //try { rs.close(); } catch (Exception e) { /* Ignored */ }
             try {
                 ps.close();
             } catch (Exception e) { /* Ignored */ }

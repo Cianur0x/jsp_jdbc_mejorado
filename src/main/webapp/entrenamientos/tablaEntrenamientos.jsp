@@ -30,8 +30,10 @@
         <th>Fecha</th>
     </tr>
     <%
+      // Se destaca el nuevo entrenamiento insertado
       String claseADestacar = "";
       Integer nuevoEntrenamiento = (Integer)session.getAttribute("nuevoEntrenamiento");
+      // Se imprime la tabla de entrenamientos
       while (listado.next()) {
       claseADestacar = (nuevoEntrenamiento != null && nuevoEntrenamiento == listado.getInt("entrenamientoID")) ? "destacar" : "";
       session.removeAttribute("nuevoEntrenamiento");
@@ -49,7 +51,8 @@
         </td>
     </tr>
         <%
-      } // while
+      }
+      // se cierra la conexión a la base de datos
       conexion.close();
      %>
 </body>

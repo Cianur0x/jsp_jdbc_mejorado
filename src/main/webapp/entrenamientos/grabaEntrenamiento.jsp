@@ -23,6 +23,8 @@
     String tipo = null;
     String ubicacion = null;
     String fecha = null;
+
+    // Flags para saber que parametro se ha validado
     boolean flagValidaNumeroID = false;
     boolean flagValidaTipoNull = false;
     boolean flagValidaTipoBlank = false;
@@ -33,9 +35,11 @@
 
 
     try {
+        // Se comprueba numero
         numEntrenamiento = Integer.parseInt(request.getParameter("numero"));
         flagValidaNumeroID = true;
 
+        // Se comprueba tipo
         Objects.requireNonNull(request.getParameter("tipo"));
         flagValidaTipoNull = true;
         if (request.getParameter("tipo").isBlank())
@@ -43,7 +47,7 @@
         tipo = request.getParameter("tipo");
         flagValidaTipoBlank = true;
 
-
+        // Se comprueba ubicación
         Objects.requireNonNull(request.getParameter("ubicacion"));
         flagValidaUbicacionNull = true;
 
@@ -52,7 +56,7 @@
         flagValidaUbicacionBlank = true;
         ubicacion = request.getParameter("ubicacion");
 
-        /// Fecha
+        // Se comprueba la fecha
         Objects.requireNonNull(request.getParameter("fecha"));
         flagValidaFechaNull = true;
 
@@ -64,6 +68,8 @@
     } catch (Exception ex) {
         ex.printStackTrace();
         valida = false;
+        // Crear un atributo nuevo en session llamado 'error'
+        // para que luego podamos avisar donde ha fallado el formulario
         if (!flagValidaNumeroID) {
             session.setAttribute("error", "Error en campo Numero");
         } else if (!flagValidaTipoNull || !flagValidaTipoBlank) {
@@ -83,7 +89,6 @@
 
         Connection conn = null;
         PreparedStatement ps = null;
-        // 	ResultSet rs = null;
 
         try {
 
@@ -96,6 +101,7 @@
                     "?, " +
                     "?)";
 
+            // Se insertan los nuevos datos en la tabla
             ps = conn.prepareStatement(sql);
             int idx = 1;
             // post incremento
@@ -111,6 +117,7 @@
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
+            // Se cierra la conexión a la base de datos y se cierra el PreparedStatement
             try {
                 ps.close();
             } catch (Exception e) { /* Ignored */ }
@@ -119,12 +126,13 @@
             } catch (Exception e) { /* Ignored */ }
         }
 
-        // out.println("Socio dado de alta.");
+        // Se va a tablaEntreanmientos para ver todos los entrenamientos insertados
+        // y se destaca el entrenamiento que se acaba de insertar
         session.setAttribute("nuevoEntrenamiento", numEntrenamiento);
         response.sendRedirect("tablaEntrenamientos.jsp");
 
     } else {
-        // out.println("Error de validación!");
+        // Si no se validan los datos se se enviara de vuelta al formulario
         response.sendRedirect("formularioEntrenamiento.jsp");
     }
 
