@@ -1,5 +1,5 @@
 USE `baloncesto`;
-DROP TABLE IF EXISTS `entrenamiento`;
+
 CREATE TABLE IF NOT EXISTS `entrenamiento`
 (
     `entrenamientoID`    INT NOT NULL AUTO_INCREMENT,

@@ -3,6 +3,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="estilos.css">
   </head>
   <body>
     <h2>Introduzca los datos del nuevo socio:</h2>
@@ -18,7 +19,7 @@
     String mensaje = (String)session.getAttribute("error");
     if (mensaje != null) {
   %>
-    <span style=" background-color: crimson; color: yellow; font-weight: bold"><%=mensaje %></span>
+    <span class="error_msj"><%=mensaje %></span>
     <%
             // para que no se queden los errores cargados en la sesion hay que borrarlos
         session.removeAttribute("error");

@@ -43,7 +43,7 @@
         flagValidaTipoBlank = true;
 
         if (!request.getParameter("tipo").equals("Técnico") && !request.getParameter("tipo").equals("Físico"))
-            throw new RuntimeException("Parámetro vacío o todo espacios blancosasdasd.");
+            throw new RuntimeException("Parámetro vacío o todo espacios blancos.");
         tipo = request.getParameter("tipo");
         flagValidaTipoCorrecto = true;
 
@@ -73,13 +73,13 @@
         // Crear un atributo nuevo en session llamado 'error'
         // para que luego podamos avisar donde ha fallado el formulario
         if (!flagValidaTipoNull || !flagValidaTipoBlank) {
-            session.setAttribute("error", "Error en campo Tipo");
+            session.setAttribute("error", "Error en campo Tipo!");
         } else if (!flagValidaTipoCorrecto) {
-            session.setAttribute("error", "Solo se aceptan entrenamientos Físico o Técnico");
+            session.setAttribute("error", "Solo se aceptan entrenamientos Físico o Técnico.");
         } else if (!flagValidaUbicacionNull || !flagValidaUbicacionBlank) {
-            session.setAttribute("error", "Error en campo Ubicación");
+            session.setAttribute("error", "Error en campo Ubicación!");
         } else if (!flagValidaFechaNull || !flagValidaFechaBlank) {
-            session.setAttribute("error", "Error en campo Fecha");
+            session.setAttribute("error", "Error en campo Fecha!");
         } else {
             session.setAttribute("bien", "Todo bien");
         }
