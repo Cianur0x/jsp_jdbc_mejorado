@@ -1,9 +1,8 @@
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.util.Objects" %>
-<%@ page import="java.time.ZoneId" %>
+<%@ page import="java.util.Date" %>
 <%@ page import="java.sql.*" %>
-<%@ page import="java.util.UUID" %><%--
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Locale" %><%--
   Created by IntelliJ IDEA.
   User: pika_
   Date: 25/11/2023
@@ -19,15 +18,14 @@
 <%
     //CÓDIGO DE VALIDACIÓN
     boolean valida = true;
-    int numEntrenamiento = -1;
     String tipo = null;
     String ubicacion = null;
-    String fecha = null;
+    Date fecha = null;
 
     // Flags para saber que parametro se ha validado
-    boolean flagValidaNumeroID = false;
     boolean flagValidaTipoNull = false;
     boolean flagValidaTipoBlank = false;
+    boolean flagValidaTipoCorrecto = false;
     boolean flagValidaUbicacionNull = false;
     boolean flagValidaUbicacionBlank = false;
     boolean flagValidaFechaNull = false;
@@ -35,9 +33,6 @@
 
 
     try {
-        // Se comprueba numero
-        numEntrenamiento = Integer.parseInt(request.getParameter("numero"));
-        flagValidaNumeroID = true;
 
         // Se comprueba tipo
         Objects.requireNonNull(request.getParameter("tipo"));
@@ -46,6 +41,11 @@
             throw new RuntimeException("Parámetro vacío o todo espacios blancos.");
         tipo = request.getParameter("tipo");
         flagValidaTipoBlank = true;
+
+        if (!request.getParameter("tipo").equals("Técnico") && !request.getParameter("tipo").equals("Físico"))
+            throw new RuntimeException("Parámetro vacío o todo espacios blancosasdasd.");
+        tipo = request.getParameter("tipo");
+        flagValidaTipoCorrecto = true;
 
         // Se comprueba ubicación
         Objects.requireNonNull(request.getParameter("ubicacion"));
@@ -60,24 +60,26 @@
         Objects.requireNonNull(request.getParameter("fecha"));
         flagValidaFechaNull = true;
 
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
         if (request.getParameter("fecha").isBlank())
             throw new RuntimeException("Parámetro vacío o todo espacios blancos.");
         flagValidaFechaBlank = true;
-        fecha = request.getParameter("fecha");
+        fecha = formatter.parse(request.getParameter("fecha"));
 
     } catch (Exception ex) {
         ex.printStackTrace();
         valida = false;
         // Crear un atributo nuevo en session llamado 'error'
         // para que luego podamos avisar donde ha fallado el formulario
-        if (!flagValidaNumeroID) {
-            session.setAttribute("error", "Error en campo Numero");
-        } else if (!flagValidaTipoNull || !flagValidaTipoBlank) {
-            session.setAttribute("error", "Error en campo Nombre");
+        if (!flagValidaTipoNull || !flagValidaTipoBlank) {
+            session.setAttribute("error", "Error en campo Tipo");
+        } else if (!flagValidaTipoCorrecto) {
+            session.setAttribute("error", "Solo se aceptan entrenamientos Físico o Técnico");
         } else if (!flagValidaUbicacionNull || !flagValidaUbicacionBlank) {
-            session.setAttribute("error", "Error en campo Localidad");
+            session.setAttribute("error", "Error en campo Ubicación");
         } else if (!flagValidaFechaNull || !flagValidaFechaBlank) {
-            session.setAttribute("error", "Error en campo Localidad");
+            session.setAttribute("error", "Error en campo Fecha");
         } else {
             session.setAttribute("bien", "Todo bien");
         }
@@ -87,6 +89,8 @@
 
     if (valida) {
 
+        ResultSet rsGenKeys = null;
+        int entrenamientoID = 0;
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -95,24 +99,21 @@
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/baloncesto", "root", "giorno");
 
-            String sql = "INSERT INTO entrenamientos VALUES ( " +
-                    "?, " +
-                    "?, " +
-                    "?, " +
-                    "?)";
+            String sql = "INSERT INTO entrenamiento(tipo_entrenamiento, ubicacion, fecha_realizacion) VALUES (?, ? , ?)";
 
             // Se insertan los nuevos datos en la tabla
-            ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             int idx = 1;
             // post incremento
-            ps.setInt(idx++, numEntrenamiento);
             ps.setString(idx++, tipo);
             ps.setString(idx++, ubicacion);
-            ps.setString(idx++, fecha);
+            ps.setDate(idx++, new java.sql.Date(fecha.getTime()));
 
             int filasAfectadas = ps.executeUpdate();
             System.out.println("ENTRENAMIENTO GRABADO:  " + filasAfectadas);
-
+            rsGenKeys = ps.getGeneratedKeys();
+            if (rsGenKeys.next())
+                entrenamientoID = rsGenKeys.getInt(1);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -128,7 +129,7 @@
 
         // Se va a tablaEntreanmientos para ver todos los entrenamientos insertados
         // y se destaca el entrenamiento que se acaba de insertar
-        session.setAttribute("nuevoEntrenamiento", numEntrenamiento);
+        session.setAttribute("nuevoEntrenamiento", entrenamientoID);
         response.sendRedirect("tablaEntrenamientos.jsp");
 
     } else {

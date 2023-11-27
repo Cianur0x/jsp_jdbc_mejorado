@@ -36,7 +36,7 @@
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/baloncesto", "root", "giorno");
 
-            String sql = "DELETE FROM entrenamientos WHERE entrenamientoID = ?";
+            String sql = "DELETE FROM entrenamiento WHERE entrenamientoID = ?";
             //CREO EL OBJETO PreparedStatement
             ps = conn.prepareStatement(sql);
 

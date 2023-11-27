@@ -26,10 +26,10 @@
       claseADestacar = (socioIDADestacar != null && socioIDADestacar == listado.getInt("socioID")) ? "destacar" : "";
       session.removeAttribute("socioIDADestacar");
     %>
-          <tr class="<%=claseADestacar%>"><td>
-            <%= listado.getInt("socioID") %></td>
+          <tr class="<%=claseADestacar%>">
+            <td><%= listado.getInt("socioID") %></td>
             <td><%= listado.getString("nombre") %></td>
-            <td><%= listado.getInt("estatura") %> </td>
+            <td><%= listado.getInt("estatura") %></td>
             <td><%= listado.getInt("edad") %></td>
             <td><%= listado.getString("localidad") %></td>
 

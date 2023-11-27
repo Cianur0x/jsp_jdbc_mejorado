@@ -14,18 +14,21 @@
 <body>
 <h2>Introduzca los datos del nuevo socio:</h2>
 <form method="post" action="grabaEntrenamiento.jsp">
-    Nº Entrenamiento <input type="text" name="numero"/></br>
-    Tipo Entrenamiento <input type="text" name="tipo"/></br>
+    <label for="tipo">Tipo Entrenamiento </label>
+    <select name="tipo" id="tipo">
+        <option value="Físico">Físico</option>
+        <option value="Técnico">Técnico</option>
+    </select></br>
     Ubicación <input type="text" name="ubicacion"/></br>
     Fecha <input type="date"  name="fecha" />
     <input type="submit" value="Aceptar">
 </form>
 <%
-    // Se revida si hay algun emensaje de error y se carga en un span
+    // Se revisa si hay algún mensaje de error y se carga en un span
     String mensaje = (String)session.getAttribute("error");
     if (mensaje != null) {
 %>
-<span style=" background-color: crimson; color: yellow; font-weight: bold"><%=mensaje %></span>
+<span class="error_msj"><%=mensaje %></span>
 <%
         // para que no se queden los errores cargados en la sesion hay que borrarlos
         session.removeAttribute("error");

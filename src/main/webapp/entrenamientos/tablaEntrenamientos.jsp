@@ -20,7 +20,7 @@
     Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/baloncesto","root", "giorno");
     Statement s = conexion.createStatement();
 
-    ResultSet listado = s.executeQuery ("SELECT * FROM entrenamientos");
+    ResultSet listado = s.executeQuery ("SELECT * FROM entrenamiento");
 %>
 <table>
     <tr>
@@ -38,15 +38,15 @@
       claseADestacar = (nuevoEntrenamiento != null && nuevoEntrenamiento == listado.getInt("entrenamientoID")) ? "destacar" : "";
       session.removeAttribute("nuevoEntrenamiento");
     %>
-    <tr class="<%=claseADestacar%>"><td>
-        <%= listado.getInt("entrenamientoID") %></td>
+    <tr class="<%=claseADestacar%>">
+        <td><%= listado.getInt("entrenamientoID") %></td>
         <td><%= listado.getString("tipo_entrenamiento") %></td>
         <td><%= listado.getString("ubicacion") %></td>
         <td><%= listado.getDate("fecha_realizacion") %></td>
         <td>
             <form method="get" action="borraEntrenamiento.jsp">
-                <input type="hidden" name="codigo" value="<%=listado.getInt("entrenamientoID") %>"/>
-                <input type="submit" value="borrar">
+                <input type="hidden" name="codigo" value="<%= listado.getInt("entrenamientoID") %>"/>
+                <input type="submit" value="borrar" id="borrarBtn">
             </form>
         </td>
     </tr>
