@@ -138,7 +138,5 @@
     }
 
 %>
-<h1><%=request.getParameter("fecha")%>
-</h1>
 </body>
 </html>
